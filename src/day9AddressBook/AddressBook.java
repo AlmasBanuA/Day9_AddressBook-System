@@ -1,23 +1,27 @@
 package day9AddressBook;
 
 /*
- * Ability to adding a new Contact to Address Book
+ * Ability to edit existing contact person using their name
  */
-
-//import scanner class
 import java.util.Scanner;
 
 public class AddressBook {
 
 	public static void main(String[] args) {
 		System.out.println("Welcome to Address Book");
-
-		/*
-		 * create object of newAddressNook class and add a new contact 
-		 */
+		Scanner sc = new Scanner(System.in);
 		newAddressBook person = new newAddressBook();
-		person.addContact();
+		person.addContact();// Calling Add Contacts Method
+		System.out.println("Enter Y To Edit The Contact");
+		String op = sc.nextLine();
 
+		if (op.equals("y") || op.equals("Y")) {
+
+			System.out.println("You have Entered following data");
+			System.out.println("The Contact Details After Editing : " + person);
+			sc.close();
+			
+		}
 	}
 
 }
@@ -31,7 +35,6 @@ class contactDetails {
 	private String phoneNumber;
 	private String email;
 
-	
 	/*
 	 * here taking the getter setter methods for the contact details
 	 */
@@ -100,7 +103,8 @@ class contactDetails {
 }
 
 /*
- * creating a newAddressBook class because using console to add person details from main class AddressBook
+ * creating a newAddressBook class because using console to add person details
+ * from main class AddressBook
  */
 class newAddressBook {
 
@@ -108,32 +112,32 @@ class newAddressBook {
 	 * using scanner class for taking details from user input
 	 */
 	Scanner sc = new Scanner(System.in);
+	contactDetails person = new contactDetails();
 
-	public void addContact() { 	//calling addContact function from main
+	public void addContact() { // calling addContact function from main
 		contactDetails person = new contactDetails();
-		
+
 		System.out.println("Enter First Name: ");
 		String firstName = sc.nextLine();
-		
+
 		System.out.println("Enter last Name: ");
 		String lastName = sc.nextLine();
-		
+
 		System.out.println("Enter your addressCity: ");
 		String addressCity = sc.nextLine();
-		
+
 		System.out.println("Enter your state: ");
 		String state = sc.nextLine();
-		
+
 		System.out.println("Enter zip code : ");
 		Long zip = sc.nextLong();
-		
+
 		System.out.println("Enter phone number: ");
 		String phoneNumber = sc.nextLine();
-		
-		
+
 		System.out.println("Enter your EMail ID: ");
 		String email = sc.nextLine();
-		
+
 		person.setFirstName(firstName);
 		person.setLastName(lastName);
 		person.setAddressCity(addressCity);
@@ -142,5 +146,19 @@ class newAddressBook {
 		person.setPhoneNumber(phoneNumber);
 		person.setEmail(email);
 		System.out.println("The Contact Details of " + firstName + "\n" + person);
+		
+		
+	}
+
+	
+	public void editContact() {
+		System.out.println("Enter the firstName of person");
+		String editName = sc.nextLine();
+		if (editName.equalsIgnoreCase(person.getFirstName()))
+			addContact();
+		else
+			System.out.println("The Entered First Name Is Not Match");
+		editContact();
+	
 	}
 }
