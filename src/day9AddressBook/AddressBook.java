@@ -155,9 +155,9 @@ class newAddressBook {
 		
 		System.out.println("The Contact Details of " + firstName + "\n" + person);
 	}
-/*
- * Ability to edit existing contact person using their name
- */
+ 	/*
+ 	* Ability to edit existing contact person using their name
+	 */
 	public void editContact() {
 		System.out.println("Enter the firstName of person");
 		String editName = sc.nextLine();
