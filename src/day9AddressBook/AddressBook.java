@@ -1,7 +1,7 @@
 package day9AddressBook;
 
 /*
- * Ability to edit existing contact person using their name
+ * import scanner class
  */
 import java.util.Scanner;
 
@@ -10,21 +10,35 @@ public class AddressBook {
 	public static void main(String[] args) {
 		System.out.println("Welcome to Address Book");
 		Scanner sc = new Scanner(System.in);
-		newAddressBook person = new newAddressBook();
-		person.addContact();// Calling Add Contacts Method
-		System.out.println("Enter Y To Edit The Contact");
-		String op = sc.nextLine();
-
-		if (op.equals("y") || op.equals("Y")) {
-
+		newAddressBook Book = new newAddressBook();
+		
+		Book.addContact();// Calling Add Contacts Method
+		
+		System.out.println(Book.person);
+		System.out.println("Enter the choice \n 1. Edit \n 2. Delete");
+		int option = sc.nextInt();
+		
+		/*
+		 * using switch case statement for executing conditions for edit and delete contact
+		 */
+		switch (option) {
+		case 1:
+			Book.editContact();
 			System.out.println("You have Entered following data");
-			System.out.println("The Contact Details After Editing : " + person);
-			sc.close();
-			
+			System.out.println(Book.person);
+			System.out.println("Thank you for Using the Address book");
+			break;
+		case 2:
+			Book.deleteContact();
+			System.out.println("Address Book details :" + Book.person);
+			break;
 		}
 	}
-
 }
+
+/*
+ * here taking the getter setter methods for the contact details
+ */
 
 class contactDetails {
 	private String firstName;
@@ -35,9 +49,6 @@ class contactDetails {
 	private String phoneNumber;
 	private String email;
 
-	/*
-	 * here taking the getter setter methods for the contact details
-	 */
 	public String getFirstName() {
 		return firstName;
 	}
@@ -101,43 +112,39 @@ class contactDetails {
 	}
 
 }
-
 /*
- * creating a newAddressBook class because using console to add person details
- * from main class AddressBook
+ *creating a newAddressBook class because using console 
+ *to add person details from main class AddressBook
  */
+
 class newAddressBook {
 
-	/*
-	 * using scanner class for taking details from user input
-	 */
 	Scanner sc = new Scanner(System.in);
 	contactDetails person = new contactDetails();
 
-	public void addContact() { // calling addContact function from main
+	public void addContact() {
 		contactDetails person = new contactDetails();
-
 		System.out.println("Enter First Name: ");
 		String firstName = sc.nextLine();
-
+		
 		System.out.println("Enter last Name: ");
 		String lastName = sc.nextLine();
-
+		
 		System.out.println("Enter your addressCity: ");
 		String addressCity = sc.nextLine();
-
+		
 		System.out.println("Enter your state: ");
 		String state = sc.nextLine();
-
+		
 		System.out.println("Enter zip code : ");
 		Long zip = sc.nextLong();
-
+		
 		System.out.println("Enter phone number: ");
 		String phoneNumber = sc.nextLine();
-
+		
 		System.out.println("Enter your EMail ID: ");
 		String email = sc.nextLine();
-
+		
 		person.setFirstName(firstName);
 		person.setLastName(lastName);
 		person.setAddressCity(addressCity);
@@ -145,12 +152,12 @@ class newAddressBook {
 		person.setZip(zip.intValue());
 		person.setPhoneNumber(phoneNumber);
 		person.setEmail(email);
+		
 		System.out.println("The Contact Details of " + firstName + "\n" + person);
-		
-		
 	}
-
-	
+/*
+ * Ability to edit existing contact person using their name
+ */
 	public void editContact() {
 		System.out.println("Enter the firstName of person");
 		String editName = sc.nextLine();
@@ -159,6 +166,17 @@ class newAddressBook {
 		else
 			System.out.println("The Entered First Name Is Not Match");
 		editContact();
-	
+	}
+
+	/*
+	 * Ability to delete a person using person's name
+	 */
+	public void deleteContact() {
+		System.out.println("Enter firstName of the person");
+		String editName = sc.nextLine();
+		if (editName.equals(person.getFirstName())) {
+			System.out.println("Deleted " + person.getFirstName() + " details");
+			person = null;
+		}
 	}
 }
